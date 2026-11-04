@@ -1,0 +1,6 @@
+{
+  "name": "GeoMaster SMA",
+  "description": "Portal belajar interaktif geografi SMA Kurikulum Merdeka dengan materi lengkap Kelas X, XI, XII, kalkulator skala peta, serta bank 100 butir soal simulasi ujian dan evaluasi otomatis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

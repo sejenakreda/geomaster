@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoMaster SMA - Portal Belajar Geografi & TKA Lengkap</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-emerald-700 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-10 h-10 rounded-xl bg-emerald-800 flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-earth-asia text-emerald-300 text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-tight block">GeoMaster SMA</span>
+                    <span class="text-xs text-emerald-200 block -mt-1">Kurikulum Merdeka & Bank Latihan 50 Soal</span>
+                </div>
+            </div>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-1">
+                <button onclick="switchTab('home')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-emerald-600 bg-emerald-800" data-target="home">Beranda</button>
+                <button onclick="switchTab('materi')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-emerald-600" data-target="materi">Materi Lengkap X-XII</button>
+                <button onclick="switchTab('kalkulator')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-emerald-600" data-target="kalkulator">Kalkulator & Rumus Skala</button>
+                <button onclick="switchTab('tka')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-emerald-600" data-target="tka">Bank Soal & Latihan Ujian</button>
+                <button onclick="switchTab('petunjuk')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-emerald-600" data-target="petunjuk">Petunjuk</button>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg hover:bg-emerald-600 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+            </button>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-emerald-800 px-4 pt-2 pb-4 space-y-1 border-t border-emerald-600">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-emerald-700">Beranda</button>
+            <button onclick="switchTab('materi'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-emerald-700">Materi Lengkap X-XII</button>
+            <button onclick="switchTab('kalkulator'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-emerald-700">Kalkulator & Rumus Skala</button>
+            <button onclick="switchTab('tka'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-emerald-700">Bank Soal & Latihan Ujian</button>
+            <button onclick="switchTab('petunjuk'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-emerald-700">Petunjuk</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- TAB 1: BERANDA -->
+        <section id="tab-home" class="tab-content space-y-8">
+            <div class="relative bg-gradient-to-br from-emerald-600 via-teal-700 to-cyan-800 rounded-3xl p-8 sm:p-12 text-white shadow-xl overflow-hidden">
+                <div class="absolute right-0 bottom-0 opacity-10 transform translate-x-10 translate-y-10">
+                    <i class="fa-solid fa-globe text-[240px]"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <span class="inline-block px-3 py-1 bg-emerald-500/40 border border-emerald-400/30 rounded-full text-xs font-semibold uppercase tracking-wider">Portal Belajar Geografi Komprehensif</span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Kuasai Geografi SMA & Ujian Seleksi Akademik</h1>
+                    <p class="text-emerald-100 text-base sm:text-lg">Dilengkapi penjelasan materi Kelas X, XI, dan XII yang sangat rinci sesuai Kurikulum Merdeka, panduan kalkulator skala peta super jelas, serta bank 50 soal latihan pilihan ganda, menjodohkan, dan analisis grafik dengan variasi soal yang unik dan berbeda satu per satu.</p>
+                    <div class="pt-4 flex flex-wrap gap-3">
+                        <button onclick="switchTab('materi')" class="px-6 py-3 bg-white text-emerald-800 font-semibold rounded-xl shadow-lg hover:bg-emerald-50 transition transform hover:-translate-y-0.5">Eksplorasi Materi</button>
+                        <button onclick="switchTab('tka')" class="px-6 py-3 bg-emerald-800/80 hover:bg-emerald-900 border border-emerald-500 text-white font-semibold rounded-xl transition">Mulai 50 Soal Latihan</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Highlights -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="switchTab('materi')" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer group">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-emerald-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1 text-slate-800">Materi Terperinci</h3>
+                    <p class="text-sm text-slate-500">Materi Kelas X, XI, dan XII diperkaya penjelasan konsep, objek studi, pendekatan, dan SDA.</p>
+                </div>
+                <div onclick="switchTab('kalkulator')" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer group">
+                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-teal-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1 text-slate-800">Mastering Skala Peta</h3>
+                    <p class="text-sm text-slate-500">Panduan rumus skala langkah demi langkah dan kalkulator interaktif anti-bingung.</p>
+                </div>
+                <div onclick="switchTab('tka')" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer group">
+                    <div class="w-12 h-12 bg-cyan-100 text-cyan-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-cyan-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1 text-slate-800">50 Soal Variatif</h3>
+                    <p class="text-sm text-slate-500">Pilihan ganda, menjodohkan, analisis grafik/peta, plus evaluasi hasil nilai otomatis.</p>
+                </div>
+                <div onclick="switchTab('petunjuk')" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer group">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-amber-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1 text-slate-800">Petunjuk Jelas</h3>
+                    <p class="text-sm text-slate-500">Panduan navigasi praktis yang dioptimalkan untuk perangkat HP dan komputer.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: MATERI LENGKAP KELAS X, XI, XII -->
+        <section id="tab-materi" class="tab-content hidden space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">Materi Pembelajaran Geografi Mendalam & Video YouTube</h2>
+                    <p class="text-sm text-slate-500">Kurikulum Merdeka SMA Kelas X, XI, dan XII lengkap dengan pembahasan dan tautan video pembelajaran.</p>
+                </div>
+                <!-- Grade Selector Tabs -->
+                <div class="flex bg-slate-100 p-1 rounded-xl w-full sm:w-auto">
+                    <button onclick="selectGrade(10)" id="btn-grade-10" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition bg-emerald-600 text-white shadow-sm">Kelas X</button>
+                    <button onclick="selectGrade(11)" id="btn-grade-11" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-600 hover:text-slate-900">Kelas XI</button>
+                    <button onclick="selectGrade(12)" id="btn-grade-12" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-600 hover:text-slate-900">Kelas XII</button>
+                </div>
+            </div>
+
+            <!-- Grade 10 Content (Very Detailed with YouTube links) -->
+            <div id="content-grade-10" class="grade-content space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Card 1 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-md">Kelas X - Bab 1</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Kajian & Perkembangan Ilmu Geografi</h3>
+                            <p class="text-sm text-slate-600 mt-2">Pengertian etimologis (Geo = Bumi, Graphein = Tulisan/Deskripsi), ruang lingkup geosfer, serta sejarah perkembangan geografi.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Kajian & Perkembangan Ilmu Geografi (Kelas X)', `Materi Lengkap Kelas X - Bab 1:\n\n1. Pengertian Geografi:\nSecara etimologis berasal dari bahasa Yunani 'Geo' (bumi) dan 'Graphein' (menulis atau mendeskripsikan). Menurut Bintarto, geografi adalah ilmu yang mencakup pengetahuan, menerangkan sifat bumi, menganalisis gejala alam dan penduduk.\n\n2. Perkembangan Sejarah Geografi:\n- Geografi Klasik: Tokoh seperti Herodotus, Eratosthenes (penemu istilah geografi dan penghitung keliling bumi), dan Strabo yang melakukan perjalanan dan menulis laporan deskriptif wilayah.\n- Geografi Fisis: Dipelopori Bernhard Varenius (membagi geografi jadi umum & khusus) dan Immanuel Kant yang menempatkan geografi pada posisi penting dalam ilmu pengetahuan.\n- Geografi Modern: Abad ke-19 hingga kini, berfokus pada analisis spasial, ekologi, kuantitatif, dan teknologi SIG.`)" class="text-emerald-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=kajian+dan+perkembangan+ilmu+geografi+kelas+x" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-md">Kelas X - Bab 2</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Tokoh-Tokoh Penting Ilmu Geografi</h3>
+                            <p class="text-sm text-slate-600 mt-2">Biografi singkat dan kontribusi Eratosthenes, Varenius, Alexander von Humboldt, Carl Ritter, dan Vidal de la Blache.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Tokoh-Tokoh Perkembangan Ilmu Geografi', `Materi Lengkap Kelas X - Bab 2:\n\n1. Eratosthenes (276–194 SM): Bapak Geografi dunia, menghitung keliling bumi dengan akurat menggunakan bayangan tongkat di Syene dan Alexandria.\n2. Bernhard Varenius (1622–1650): Menulis buku 'Geographia Generalis' yang membagi geografi menjadi Geografi Absolut/Umum (fisis) dan Geografi Khusus (regional).\n3. Alexander von Humboldt (1769–1859): Penemu konsep klimatologi modern, menjelajahi Amerika Latin, mencatat hubungan iklim dan vegetasi.\n4. Carl Ritter (1779–1859): Bapak Geografi Sosial-Budaya, menekankan pengaruh alam terhadap peradaban manusia.\n5. Paul Vidal de la Blache (1845–1918): Pelopor mazhab Possibilisme (alam memberikan peluang, manusia yang menentukan pilihan kebudayaan).`)" class="text-emerald-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=tokoh+tokoh+perkembangan+ilmu+geografi+sma" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-md">Kelas X - Bab 3</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Objek Studi Geografi (Formal & Material)</h3>
+                            <p class="text-sm text-slate-600 mt-2">Pembahasan rinci lapisan geosfer (material) serta sudut pandang keruangan, kelingkungan, dan kewilayahan (formal).</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Objek Studi Geografi Formal & Material', `Materi Lengkap Kelas X - Bab 3:\n\n1. Objek Material (Materi Fisik & Hayati / Geosfer):\n- Litosfer: Lapisan batuan dan tanah.\n- Atmosfer: Lapisan udara, cuaca, dan iklim.\n- Hidrosfer: Perairan darat dan laut.\n- Biosfer: Kehidupan flora dan fauna.\n- Antroposfer: Aktivitas dan dinamika kependudukan manusia.\n\n2. Objek Formal (Sudut Pandang Analisis):\n- Aspek Keruangan (Spatial): Mempelajari persebaran gejala di permukaan bumi.\n- Aspek Kelingkungan (Ecological): Mempelajari interaksi organisme hidup dengan lingkungannya.\n- Aspek Kewilayahan (Regional): Mempelajari perbandingan karakteristik antarwilayah.`)" class="text-emerald-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=objek+studi+geografi+formal+dan+material" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-md">Kelas X - Bab 4</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Pendekatan & Prinsip Geografi</h3>
+                            <p class="text-sm text-slate-600 mt-2">Analisis keruangan, kelingkungan, kompleks wilayah serta 4 pilar prinsip geografi (persebaran, interelasi, deskripsi, korologi).</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Pendekatan & Prinsip Geografi', `Materi Lengkap Kelas X - Bab 4:\n\nA. 3 Pendekatan Utama:\n1. Pendekatan Keruangan: Fokus pada lokasi, pola, dan persebaran.\n2. Pendekatan Kelingkungan: Fokus pada hubungan timbal balik makhluk hidup dengan alam.\n3. Pendekatan Kompleks Wilayah: Kombinasi keruangan dan ekologi untuk mengatasi permasalahan regional.\n\nB. 4 Prinsip Geografi:\n1. Prinsip Persebaran: Gejala geosfer tersebar tidak merata.\n2. Prinsip Interelasi: Keterkaitan antara satu gejala dengan gejala lain (misal: banjir akibat penggundulan hutan).\n3. Prinsip Deskripsi: Penjelasan fakta geografi melalui peta, grafik, dan tabel.\n4. Prinsip Korologi: Tinjauan komprehensif yang memadukan persebaran, interelasi, dan deskripsi dalam satu ruang.`)" class="text-emerald-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=pendekatan+dan+prinsip+geografi+kelas+x" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-md">Kelas X - Bab 5</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">10 Konsep Esensial Geografi</h3>
+                            <p class="text-sm text-slate-600 mt-2">Lokasi, Jarak, Keterjangkauan, Pola, Morfologi, Nilai Guna, Aglomerasi, Interaksi, Diferensiasi Area, Keterkaitan Keruangan.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('10 Konsep Esensial Geografi', `Materi Lengkap Kelas X - Bab 5:\n\n1. Lokasi: Letak absolut (lintang/bujur) & relatif (posisi terhadap daerah lain).\n2. Jarak: Jarak spasial (km) atau waktu tempuh.\n3. Keterjangkauan: Kemudahan mencapai suatu objek.\n4. Pola: Bentuk persebaran (misal permukiman linier di sepanjang sungai).\n5. Morfologi: Bentuk muka bumi hasil tenaga endogen/eksogen.\n6. Nilai Guna: Kelebihan suatu tempat untuk aktivitas tertentu.\n7. Aglomerasi: Pengelompokan aktivitas (misal kawasan industri).\n8. Interaksi/Interdependensi: Hubungan timbal balik antarwilayah.\n9. Diferensiasi Area: Keunikan antarwilayah.\n10. Keterkaitan Keruangan: Hubungan sebab-akibat antarwilayah.`)" class="text-emerald-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=10+konsep+esensial+geografi+dan+contohnya" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-md">Kelas X - Bab 6</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Penelitian, Skala Peta, PJ & SIG</h3>
+                            <p class="text-sm text-slate-600 mt-2">Metode ilmiah penelitian geosfer, rumus skala peta, interval kontur, penginderaan jauh, dan komponen SIG.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Penelitian, Peta, PJ & SIG (Kelas X)', `Materi Lengkap Kelas X - Bab 6:\n\n1. Penelitian Geografi:\nMenggunakan metode ilmiah dimulai dari perumusan masalah, observasi lapangan, pengumpulan data spasial, hingga analisis kesimpulan.\n\n2. Skala Peta & Kontur:\n- Skala Angka (1:50.000), Skala Garis/Grafik.\n- Interval Kontur (CI) = 1/2000 x Penyebut Skala.\n\n3. Penginderaan Jauh (PJ):\nSistem perekaman objek tanpa kontak langsung menggunakan sensor pada satelit/pesawat.\n\n4. Sistem Informasi Geografis (SIG):\nSistem berbasis komputer yang mengolah data spasial raster dan vektor untuk perencanaan pembangunan.`)" class="text-emerald-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=skala+peta+penginderaan+jauh+dan+sig+geografi+kelas+x" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade 11 Content (Very Detailed with YouTube links) -->
+            <div id="content-grade-11" class="grade-content hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Card 1 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-teal-100 text-teal-800 text-xs font-semibold rounded-md">Kelas XI - Bab 1</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Posisi Strategis Indonesia & Poros Maritim Dunia</h3>
+                            <p class="text-sm text-slate-600 mt-2">Analisis letak astronomis, geografis, geologis, jalur pelayaran internasional, dan visi pembangunan maritim.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Posisi Strategis Indonesia (Kelas XI)', `Materi Lengkap Kelas XI - Bab 1:\n\n1. Letak Astronomis (6°LU - 11°LS dan 95°BT - 141°BT):\nMenjadikan Indonesia beriklim tropis dengan curah hujan tinggi, penyinaran matahari sepanjang tahun, serta terbagi dalam 3 zona waktu (WIB, WITA, WIT).\n\n2. Letak Geografis:\nTerletak di posisi silang dunia antara Benua Asia & Australia serta Samudra Hindia & Pasifik, menjadikan Indonesia jalur utama perdagangan internasional.\n\n3. Letak Geologis:\nPertemuan tiga lempeng utama (Eurasia, Indo-Australia, Pasifik) serta dilalui jalur pegunungan Sirkum Mediterania dan Pasifik, menghasilkan kesuburan tanah vulkanik yang tinggi namun berisiko gempa.\n\n4. Poros Maritim Dunia:\nKebijakan strategis memperkuat kekuatan armada laut, konektivitas pulau, dan diplomasi kelautan.`)" class="text-teal-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=posisi+strategis+indonesia+sebagai+poros+maritim+dunia+kelas+xi" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-teal-100 text-teal-800 text-xs font-semibold rounded-md">Kelas XI - Bab 2</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Pengelolaan Sumber Daya Alam (SDA) Indonesia</h3>
+                            <p class="text-sm text-slate-600 mt-2">Klasifikasi SDA terbarukan & tak terbarukan, pertambangan, kehutanan, serta prinsip pembangunan berkelanjutan.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Pengelolaan SDA Indonesia (Kelas XI)', `Materi Lengkap Kelas XI - Bab 2:\n\n1. Klasifikasi SDA:\n- Terbarukan: Air, tanah, hutan, hasil laut yang dapat pulih kembali.\n- Tidak Terbarukan: Minyak bumi, gas alam, batu bara, nikel, emas yang cadangannya terbatas.\n\n2. Prinsip Pembangunan Berkelanjutan (Sustainable Development):\nMemanfaatkan kekayaan alam tanpa mengorbankan hak generasi mendatang melalui AMDAL (Analisis Mengenai Dampak Lingkungan) dan prinsip ekonomi hijau.\n\n3. Potensi Strategis Nasional:\nIndonesia sebagai produsen terbesar nikel dunia, cadangan batu bara terbesar di Asia Tenggara, serta potensi energi surya & air yang melimpah.`)" class="text-teal-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=pengelolaan+sumber+daya+alam+indonesia+geografi+kelas+xi" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-teal-100 text-teal-800 text-xs font-semibold rounded-md">Kelas XI - Bab 3</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Persebaran Flora & Fauna Indonesia & Dunia</h3>
+                            <p class="text-sm text-slate-600 mt-2">Garis Wallace dan Weber, karakteristik fauna Asiatis, Peralihan, Australis, bioma darat dunia, dan konservasi.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Persebaran Flora & Fauna (Kelas XI)', `Materi Lengkap Kelas XI - Bab 3:\n\n1. Garis Pembatas Fauna:\n- Garis Wallace: Memisahkan wilayah Asiatis (Sumatra, Jawa, Kalimantan) dengan Wallacea/Peralihan.\n- Garis Weber: Memisahkan wilayah Wallacea dengan Australis (Papua & kepulauan sekitarnya).\n\n2. Karakteristik Fauna:\n- Asiatis: Mamalia berukuran besar (gajah, badak, harimau, orangutan).\n- Peralihan (Endemik): Hewan khas unik (komodo, anoa, babirusa, burung maleo).\n- Australis: Mamalia berkantung & burung berbulu indah (kuskus, kanguru pohon, cenderawasih).\n\n3. Bioma Dunia:\nTundra, Taiga, Hutan Gugur, Padang Rumput (Stepa/Sabana), Gurun, dan Hutan Hujan Tropis.`)" class="text-teal-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=persebaran+flora+dan+fauna+di+indonesia+dan+dunia+kelas+xi" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade 12 Content (Very Detailed with YouTube links) -->
+            <div id="content-grade-12" class="grade-content hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Card 1 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-cyan-100 text-cyan-800 text-xs font-semibold rounded-md">Kelas XII - Bab 1</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Wilayah, Perwilayahan & Pusat Pertumbuhan</h3>
+                            <p class="text-sm text-slate-600 mt-2">Teori tempat sentral (Christaller), Teori Gravitasi (Reilly), titik henti, serta perencanaan tata ruang wilayah nasional.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Wilayah & Pusat Pertumbuhan (Kelas XII)', `Materi Lengkap Kelas XII - Bab 1:\n\n1. Pusat Pertumbuhan:\nWilayah yang memiliki perkembangan pesat sehingga memengaruhi wilayah periferi (belakang) di sekitarnya.\n\n2. Teori Tempat Sentral (Walter Christaller):\n- Hierarki 3 (K=3): Pusat pasar optimum.\n- Hierarki 4 (K=4): Situasi lalu lintas optimum.\n- Hierarki 7 (K=7): Situasi administrasi optimum.\n\n3. Teori Gravitasi W.J. Reilly:\nMenghitung kekuatan interaksi ekonomi antar dua kota berdasarkan jumlah penduduk berbanding kuadrat jarak.\n\n4. Teori Titik Henti:\nMenentukan lokasi ideal pembangunan fasilitas umum di antara dua kota agar adil bagi masyarakat.`)" class="text-cyan-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=wilayah+perwilayahan+dan+pusat+pertumbuhan+geografi+kelas+xii" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-cyan-100 text-cyan-800 text-xs font-semibold rounded-md">Kelas XII - Bab 2</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Interaksi Desa & Kota</h3>
+                            <p class="text-sm text-slate-600 mt-2">Struktur keruangan kota (Burgess, Hoyt, Harris-Ullman), pola desa, urbanisasi, serta dampak interaksi desa-kota.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Interaksi Desa & Kota (Kelas XII)', `Materi Lengkap Kelas XII - Bab 2:\n\n1. Pola Keruangan Desa:\nMenyebar di daerah pegunungan, mengelompok di sumber air, linier mengikuti jalan raya/sungai.\n\n2. Struktur Ruang Kota:\n- Teori Konsentris (Burgess): Berkembang dari pusat melingkar keluar.\n- Teori Sektoral (Hoyt): Berkembang berdasarkan sektor jalur transportasi.\n- Teori Inti Berganda (Harris-Ullman): Kota memiliki banyak pusat nukleus fungsional.\n\n3. Urbanisasi & Solusi Permasalahan:\nPenanganan migrasi penduduk desa ke kota melalui pembangunan pedesaan (pemberdayaan BUMDes) dan penyediaan rumah susun layak huni.`)" class="text-cyan-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=interaksi+desa+dan+kota+geografi+kelas+xii" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 bg-cyan-100 text-cyan-800 text-xs font-semibold rounded-md">Kelas XII - Bab 3</span>
+                            <h3 class="font-bold text-lg text-slate-800 mt-2">Negara Maju & Berkembang di Era Globalisasi</h3>
+                            <p class="text-sm text-slate-600 mt-2">Indikator pembangunan manusia (IPM), persebaran negara maju, serta dinamika kerja sama internasional.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openMateriModal('Negara Maju & Berkembang (Kelas XII)', `Materi Lengkap Kelas XII - Bab 3:\n\n1. Indikator Negara Maju:\n- Pendapatan per kapita tinggi (> USD 12.000).\n- Angka harapan hidup tinggi & tingkat pertumbuhan penduduk rendah.\n- Dominasi sektor industri sekunder & tersier (jasa, teknologi tinggi).\n\n2. Indikator Negara Berkembang:\n- Pendapatan per kapita menengah ke bawah.\n- Tingkat pengangguran tinggi dan ketergantungan pada sektor agraris.\n\n3. Kerja Sama Global:\nPeran organisasi internasional (WTO, IMF, ASEAN, G20) dalam mempercepat pertumbuhan ekonomi negara anggota.`)" class="text-cyan-600 font-semibold text-sm hover:underline flex items-center gap-1">Baca Teks <i class="fa-solid fa-arrow-right"></i></button>
+                            <a href="https://www.youtube.com/results?search_query=negara+maju+dan+berkembang+geografi+kelas+xii" target="_blank" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg text-xs font-bold flex items-center gap-1.5 transition"><i class="fa-brands fa-youtube text-base"></i> Video</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: KALKULATOR & PANDUAN SKALA PETA -->
+        <section id="tab-kalkulator" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 space-y-4">
+                <h2 class="text-2xl font-bold text-slate-800">Panduan Super Jelas: Memahami Skala Peta Geografi</h2>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    Banyak siswa sering bingung dalam menghitung skala peta karena keliru mengubah satuan centimeter (cm) ke kilometer (km) atau sebaliknya. Berikut adalah panduan singkat agar Anda langsung paham selamanya:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                    <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+                        <h4 class="font-bold text-emerald-900 mb-1">1. Rumus Utama Skala</h4>
+                        <p class="text-xs text-emerald-800 font-mono bg-white p-2 rounded border border-emerald-100 mb-2">Skala = JP / JS</p>
+                        <p class="text-xs text-emerald-700">Dimana <b>JP</b> adalah Jarak pada Peta (cm), dan <b>JS</b> adalah Jarak Sebenarnya (cm atau km).</p>
+                    </div>
+                    <div class="p-4 bg-teal-50 rounded-xl border border-teal-200">
+                        <h4 class="font-bold text-teal-900 mb-1">2. Aturan Emas Konversi</h4>
+                        <p class="text-xs text-teal-800 font-mono bg-white p-2 rounded border border-teal-100 mb-2">1 km = 100.000 cm</p>
+                        <p class="text-xs text-teal-700">Saat mencari penyebut skala atau jarak sebenarnya, selalu ubah kilometer ke centimeter dengan mengalikan <b>100.000</b>.</p>
+                    </div>
+                    <div class="p-4 bg-cyan-50 rounded-xl border border-cyan-200">
+                        <h4 class="font-bold text-cyan-900 mb-1">3. Interval Kontur (CI)</h4>
+                        <p class="text-xs text-cyan-800 font-mono bg-white p-2 rounded border border-cyan-100 mb-2">CI = 1 / 2000 × Penyebut</p>
+                        <p class="text-xs text-cyan-700">Digunakan untuk menghitung beda tinggi antar garis kontur pada peta topografi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calculator Selector Buttons -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <button onclick="switchCalculator('skala')" id="calc-btn-skala" class="p-4 rounded-2xl border-2 border-emerald-600 bg-emerald-50 text-emerald-900 font-semibold text-left transition shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="block text-sm text-emerald-600 font-medium">Alat 1</span>
+                        <span class="text-base font-bold">Kalkulator Skala Peta</span>
+                    </div>
+                    <i class="fa-solid fa-map text-emerald-600 text-xl"></i>
+                </button>
+                <button onclick="switchCalculator('kontur')" id="calc-btn-kontur" class="p-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-semibold text-left transition hover:border-slate-300 flex items-center justify-between">
+                    <div>
+                        <span class="block text-sm text-slate-400 font-medium">Alat 2</span>
+                        <span class="text-base font-bold">Kontur Interval (CI)</span>
+                    </div>
+                    <i class="fa-solid fa-mountain text-slate-400 text-xl"></i>
+                </button>
+                <button onclick="switchCalculator('gravitasi')" id="calc-btn-gravitasi" class="p-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-semibold text-left transition hover:border-slate-300 flex items-center justify-between">
+                    <div>
+                        <span class="block text-sm text-slate-400 font-medium">Alat 3</span>
+                        <span class="text-base font-bold">Kekuatan Interaksi (Reilly)</span>
+                    </div>
+                    <i class="fa-solid fa-city text-slate-400 text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Calculator 1: Skala Peta -->
+            <div id="calc-skala" class="calculator-panel bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 space-y-6">
+                <div class="border-b pb-4">
+                    <h3 class="text-xl font-bold text-slate-800">Kalkulator Interaktif Skala Peta</h3>
+                    <p class="text-sm text-slate-500">Pilih parameter yang ingin dicari, lalu masukkan angka untuk mendapatkan hasil instan disertai penjelasan langkahnya.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Pilih Operasi Hitung</label>
+                        <select id="skala-mode" onchange="toggleSkalaMode()" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white">
+                            <option value="penyebut">Mencari Penyebut Skala (Diketahui JP & JS)</option>
+                            <option value="jp">Mencari Jarak pada Peta / JP (Diketahui Skala & JS)</option>
+                            <option value="js">Mencari Jarak Sebenarnya / JS (Diketahui Skala & JP)</option>
+                        </select>
+                    </div>
+                    <div id="skala-input-1" class="space-y-2">
+                        <label id="label-in-1" class="block text-sm font-semibold text-slate-700">Jarak pada Peta (cm)</label>
+                        <input type="number" id="val-jp" placeholder="Contoh: 5" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <div id="skala-input-2" class="space-y-2">
+                        <label id="label-in-2" class="block text-sm font-semibold text-slate-700">Jarak Sebenarnya (km)</label>
+                        <input type="number" id="val-js" placeholder="Contoh: 50" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                </div>
+                <button onclick="hitungSkala()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-md transition">Hitung Sekarang</button>
+                <div id="hasil-skala" class="hidden p-5 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 space-y-2"></div>
+            </div>
+
+            <!-- Calculator 2: Interval Kontur -->
+            <div id="calc-kontur" class="calculator-panel hidden bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 space-y-6">
+                <div class="border-b pb-4">
+                    <h3 class="text-xl font-bold text-slate-800">Kalkulator Interval Kontur (CI)</h3>
+                    <p class="text-sm text-slate-500">Rumus: <code class="bg-slate-100 px-2 py-0.5 rounded text-emerald-700 font-mono">CI = 1 / 2000 × Penyebut Skala</code></p>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-700">Penyebut Skala Peta (contoh: 50000 untuk 1:50.000)</label>
+                    <input type="number" id="val-penyebut-skala" placeholder="Contoh: 50000" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <button onclick="hitungKontur()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-md transition">Hitung Kontur Interval</button>
+                <div id="hasil-kontur" class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 font-medium"></div>
+            </div>
+
+            <!-- Calculator 3: Interaksi Gravitasi -->
+            <div id="calc-gravitasi" class="calculator-panel hidden bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 space-y-6">
+                <div class="border-b pb-4">
+                    <h3 class="text-xl font-bold text-slate-800">Kalkulator Kekuatan Interaksi Wilayah (Reilly)</h3>
+                    <p class="text-sm text-slate-500">Rumus: <code class="bg-slate-100 px-2 py-0.5 rounded text-emerald-700 font-mono">I = (Pa × Pb) / (d²)</code></p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Jumlah Penduduk Kota A (Pa)</label>
+                        <input type="number" id="val-pa" placeholder="Contoh: 100000" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Jumlah Penduduk Kota B (Pb)</label>
+                        <input type="number" id="val-pb" placeholder="Contoh: 400000" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Jarak A ke B (d dalam km)</label>
+                        <input type="number" id="val-jarak-ab" placeholder="Contoh: 20" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                </div>
+                <button onclick="hitungGravitasi()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-md transition">Hitung Kekuatan Interaksi</button>
+                <div id="hasil-gravitasi" class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 font-medium"></div>
+            </div>
+        </section>
+
+        <!-- TAB 4: BANK SOAL & 50 SOAL LATIHAN -->
+        <section id="tab-tka" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="px-3 py-1 bg-cyan-100 text-cyan-800 text-xs font-semibold rounded-md">Simulasi Ujian Akademik Geografi</span>
+                    <h2 class="text-2xl font-bold text-slate-800 mt-2">Bank Soal Latihan Geografi (50 Butir Soal Unik)</h2>
+                    <p class="text-sm text-slate-500">Mencakup Soal Pilihan Ganda, Soal Menjodohkan, serta Analisis Grafik/Data & Tabel Standar Ujian Tanpa Duplikasi.</p>
+                </div>
+                <button onclick="mulaiTKA()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-play"></i> Mulai Ujian 50 Soal
+                </button>
+            </div>
+
+            <!-- Exam Container (Hidden initially) -->
+            <div id="tka-exam-box" class="hidden bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 space-y-6">
+                <div class="flex justify-between items-center border-b pb-4">
+                    <div>
+                        <span id="tka-counter" class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Soal 1 dari 50</span>
+                        <h3 id="tka-question-topic" class="text-sm font-semibold text-slate-500">Topik Soal</h3>
+                    </div>
+                    <div class="bg-emerald-50 text-emerald-800 px-3 py-1.5 rounded-lg text-sm font-semibold">
+                        <i class="fa-solid fa-clock mr-1"></i> <span id="tka-timer">45:00</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div id="tka-media-container"></div>
+                    <p id="tka-question-text" class="text-slate-800 text-base sm:text-lg font-medium">Teks Soal disini...</p>
+                    <div id="tka-options-container" class="space-y-3">
+                        <!-- Options or Matching injected by JS -->
+                    </div>
+                </div>
+
+                <div class="flex justify-between pt-4 border-t">
+                    <button onclick="prevTKAQuestion()" id="btn-prev-tka" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition text-sm disabled:opacity-50" disabled>Sebelumnya</button>
+                    <button onclick="nextTKAQuestion()" id="btn-next-tka" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition text-sm">Selanjutnya</button>
+                </div>
+            </div>
+
+            <!-- Result Box (Hidden initially) -->
+            <div id="tka-result-box" class="hidden bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center space-y-6">
+                <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-extrabold text-slate-800">Evaluasi Hasil Ujian 50 Soal Geografi</h3>
+                    <p class="text-sm text-slate-500">Nilai langsung muncul secara otomatis beserta pembahasan lengkap.</p>
+                </div>
+                <div class="inline-block bg-emerald-50 border border-emerald-200 px-8 py-4 rounded-2xl">
+                    <span class="block text-xs font-semibold text-emerald-600 uppercase tracking-widest">Nilai Akhir Anda</span>
+                    <span id="tka-final-score" class="text-5xl font-extrabold text-emerald-700">100</span>
+                </div>
+                <div id="tka-review-list" class="text-left space-y-4 mt-6 max-h-[500px] overflow-y-auto pr-2">
+                    <!-- Review items injected here -->
+                </div>
+                <button onclick="resetTKA()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition shadow-md">Ulangi Simulasi Latihan</button>
+            </div>
+
+            <!-- Bank Soal Static Preview & Variation info -->
+            <div id="tka-preview-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-3">
+                    <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-md">Pilihan Ganda</span>
+                    <h4 class="font-bold text-slate-800">Soal Analisis Konseptual</h4>
+                    <p class="text-sm text-slate-600">Menguji pemahaman mendalam tentang prinsip geografi, pendekatan keruangan, dan biosfer.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-3">
+                    <span class="px-2.5 py-1 bg-teal-100 text-teal-800 text-xs font-semibold rounded-md">Soal Menjodohkan</span>
+                    <h4 class="font-bold text-slate-800">Pencocokan Teori & Tokoh</h4>
+                    <p class="text-sm text-slate-600">Format soal ujian modern yang mencocokkan teori pusat pertumbuhan atau flora-fauna dengan wilayahnya.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-3">
+                    <span class="px-2.5 py-1 bg-cyan-100 text-cyan-800 text-xs font-semibold rounded-md">Analisis Grafik/Data</span>
+                    <h4 class="font-bold text-slate-800">Interpretasi Tabel & Grafik</h4>
+                    <p class="text-sm text-slate-600">Menganalisis grafik pertumbuhan penduduk, curah hujan, kependudukan, dan peta kontur.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: PETUNJUK -->
+        <section id="tab-petunjuk" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 space-y-6">
+                <div>
+                    <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded-md">Panduan Pengguna HP & Desktop</span>
+                    <h2 class="text-2xl font-bold text-slate-800 mt-2">Petunjuk Penggunaan Web GeoMaster SMA</h2>
+                    <p class="text-sm text-slate-500">Panduan praktis agar Anda dapat belajar dengan efisien dan nyaman.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold">1</div>
+                        <h3 class="font-bold text-slate-800">Eksplorasi Materi Rinci</h3>
+                        <p class="text-sm text-slate-600">Pilih menu <b>Materi Lengkap X-XII</b>, pilih kelas, lalu klik tombol "Baca Penjelasan Rinci" pada setiap bab untuk memahami teori secara mendalam.</p>
+                    </div>
+                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <div class="w-10 h-10 rounded-lg bg-teal-600 text-white flex items-center justify-center font-bold">2</div>
+                        <h3 class="font-bold text-slate-800">Kalkulator & Rumus Skala Jelas</h3>
+                        <p class="text-sm text-slate-600">Gunakan menu <b>Kalkulator & Rumus Skala</b> untuk mempelajari aturan konversi cm ke km serta menghitung skala peta, interval kontur, dan interaksi gravitasi.</p>
+                    </div>
+                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-600 text-white flex items-center justify-center font-bold">3</div>
+                        <h3 class="font-bold text-slate-800">Kerjakan 50 Soal Latihan</h3>
+                        <p class="text-sm text-slate-600">Di menu <b>Bank Soal & Latihan Ujian</b>, nikmati simulasi ujian 50 soal unik yang mencakup pilihan ganda, menjodohkan, dan membaca grafik dengan evaluasi nilai otomatis.</p>
+                    </div>
+                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <div class="w-10 h-10 rounded-lg bg-amber-600 text-white flex items-center justify-center font-bold">4</div>
+                        <h3 class="font-bold text-slate-800">Nyaman di Smartphone (HP)</h3>
+                        <p class="text-sm text-slate-600">Tampilan dirancang responsif, tombol sentuh empuk, dan tata letak fleksibel sangat nyaman diakses dari ponsel pintar Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Detail Materi -->
+    <div id="materi-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-4 shadow-xl border border-slate-100 transform transition-all">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 id="modal-title" class="text-xl font-bold text-slate-800">Judul Materi</h3>
+                <button onclick="closeMateriModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="modal-body" class="text-slate-600 text-sm sm:text-base whitespace-pre-line max-h-[60vh] overflow-y-auto pr-2">
+                Isi materi lengkap...
+            </div>
+            <div class="pt-4 border-t flex justify-end">
+                <button onclick="closeMateriModal()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl text-sm transition">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-sm text-slate-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 GeoMaster SMA. Portal Belajar Geografi Kurikulum Merdeka & Latihan Ujian 50 Butir.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Navigation Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-emerald-800');
+                if(btn.dataset.target === tabId) {
+                    btn.classList.add('bg-emerald-800');
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        // Grade Content Switcher (X, XI, XII)
+        function selectGrade(grade) {
+            document.querySelectorAll('.grade-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('content-grade-' + grade).classList.remove('hidden');
+
+            [10, 11, 12].forEach(g => {
+                const btn = document.getElementById('btn-grade-' + g);
+                if(g === grade) {
+                    btn.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition bg-emerald-600 text-white shadow-sm";
+                } else {
+                    btn.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-600 hover:text-slate-900";
+                }
+            });
+        }
+
+        // Modal Materi
+        function openMateriModal(title, text) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerText = text;
+            document.getElementById('materi-modal').classList.remove('hidden');
+        }
+
+        function closeMateriModal() {
+            document.getElementById('materi-modal').classList.add('hidden');
+        }
+
+        // Calculator Tabs
+        function switchCalculator(calcId) {
+            ['skala', 'kontur', 'gravitasi'].forEach(id => {
+                document.getElementById('calc-' + id).classList.add('hidden');
+                const btn = document.getElementById('calc-btn-' + id);
+                btn.className = "p-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-semibold text-left transition hover:border-slate-300 flex items-center justify-between";
+            });
+            document.getElementById('calc-' + calcId).classList.remove('hidden');
+            const activeBtn = document.getElementById('calc-btn-' + calcId);
+            activeBtn.className = "p-4 rounded-2xl border-2 border-emerald-600 bg-emerald-50 text-emerald-900 font-semibold text-left transition shadow-sm flex items-center justify-between";
+        }
+
+        // Calculator Skala Mode Toggle
+        function toggleSkalaMode() {
+            const mode = document.getElementById('skala-mode').value;
+            const label1 = document.getElementById('label-in-1');
+            const label2 = document.getElementById('label-in-2');
+            const input1 = document.getElementById('val-jp');
+            const input2 = document.getElementById('val-js');
+
+            if(mode === 'penyebut') {
+                label1.innerText = "Jarak pada Peta (cm)";
+                label2.innerText = "Jarak Sebenarnya (km)";
+                input1.placeholder = "Contoh: 5";
+                input2.placeholder = "Contoh: 50";
+            } else if(mode === 'jp') {
+                label1.innerText = "Penyebut Skala (misal 50000)";
+                label2.innerText = "Jarak Sebenarnya (km)";
+                input1.placeholder = "Contoh: 50000";
+                input2.placeholder = "Contoh: 50";
+            } else if(mode === 'js') {
+                label1.innerText = "Penyebut Skala (misal 50000)";
+                label2.innerText = "Jarak pada Peta (cm)";
+                input1.placeholder = "Contoh: 50000";
+                input2.placeholder = "Contoh: 5";
+            }
+        }
+
+        // Hitung Kalkulator Skala dengan Penjelasan Langkah Rinci
+        function hitungSkala() {
+            const mode = document.getElementById('skala-mode').value;
+            const v1 = parseFloat(document.getElementById('val-jp').value);
+            const v2 = parseFloat(document.getElementById('val-js').value);
+            const hasilBox = document.getElementById('hasil-skala');
+
+            if(isNaN(v1) || isNaN(v2) || v1 <= 0 || v2 <= 0) {
+                hasilBox.classList.remove('hidden');
+                hasilBox.innerHTML = "<b>Perhatian:</b> Mohon masukkan angka yang valid dan lebih dari 0!";
+                return;
+            }
+
+            let htmlContent = "";
+            if(mode === 'penyebut') {
+                const jsCm = v2 * 100000;
+                const penyebut = jsCm / v1;
+                htmlContent = `
+                    <h4 class="font-bold text-base mb-1">Hasil & Langkah Perhitungan Penyebut Skala:</h4>
+                    <p class="text-xs">1. Rumus: Skala = Jarak pada Peta (JP) / Jarak Sebenarnya (JS)</p>
+                    <p class="text-xs">2. Ubah Jarak Sebenarnya (${v2} km) ke centimeter: ${v2} × 100.000 = ${jsCm.toLocaleString('id-ID')} cm.</p>
+                    <p class="text-xs">3. Bagikan dengan Jarak pada Peta (${v1} cm): ${jsCm.toLocaleString('id-ID')} / ${v1} = ${penyebut.toLocaleString('id-ID')}.</p>
+                    <p class="text-sm font-extrabold mt-2 text-emerald-700">Maka Skala Peta adalah 1 : ${penyebut.toLocaleString('id-ID')}</p>
+                `;
+            } else if(mode === 'jp') {
+                const jp = (v2 * 100000) / v1;
+                htmlContent = `
+                    <h4 class="font-bold text-base mb-1">Hasil & Langkah Perhitungan Jarak Peta (JP):</h4>
+                    <p class="text-xs">1. Rumus: JP = (Jarak Sebenarnya (JS) dalam cm) / Penyebut Skala</p>
+                    <p class="text-xs">2. Ubah ${v2} km ke cm: ${v2} × 100.000 = ${(v2*100000).toLocaleString('id-ID')} cm.</p>
+                    <p class="text-xs">3. Bagi dengan penyebut skala (${v1}): ${(v2*100000).toLocaleString('id-ID')} / ${v1} = ${jp.toFixed(2)} cm.</p>
+                    <p class="text-sm font-extrabold mt-2 text-emerald-700">Maka Jarak pada Peta (JP) adalah ${jp.toFixed(2)} cm</p>
+                `;
+            } else if(mode === 'js') {
+                const js = (v2 * v1) / 100000;
+                htmlContent = `
+                    <h4 class="font-bold text-base mb-1">Hasil & Langkah Perhitungan Jarak Sebenarnya (JS):</h4>
+                    <p class="text-xs">1. Rumus: JS (cm) = Jarak pada Peta (JP) × Penyebut Skala</p>
+                    <p class="text-xs">2. Hitung: ${v2} cm × ${v1} = ${(v2*v1).toLocaleString('id-ID')} cm.</p>
+                    <p class="text-xs">3. Ubah cm ke km (bagi 100.000): ${(v2*v1).toLocaleString('id-ID')} / 100.000 = ${js.toFixed(2)} km.</p>
+                    <p class="text-sm font-extrabold mt-2 text-emerald-700">Maka Jarak Sebenarnya (JS) adalah ${js.toFixed(2)} km</p>
+                `;
+            }
+
+            hasilBox.classList.remove('hidden');
+            hasilBox.innerHTML = htmlContent;
+        }
+
+        // Hitung Kontur Interval
+        function hitungKontur() {
+            const penyebut = parseFloat(document.getElementById('val-penyebut-skala').value);
+            const hasilBox = document.getElementById('hasil-kontur');
+
+            if(isNaN(penyebut) || penyebut <= 0) {
+                hasilBox.classList.remove('hidden');
+                hasilBox.innerText = "Mohon masukkan penyebut skala yang valid!";
+                return;
+            }
+
+            const ci = (1 / 2000) * penyebut;
+            hasilBox.classList.remove('hidden');
+            hasilBox.innerText = `Hasil: Interval Kontur (CI) adalah ${ci} meter`;
+        }
+
+        // Hitung Gravitasi Reilly
+        function hitungGravitasi() {
+            const pa = parseFloat(document.getElementById('val-pa').value);
+            const pb = parseFloat(document.getElementById('val-pb').value);
+            const jarak = parseFloat(document.getElementById('val-jarak-ab').value);
+            const hasilBox = document.getElementById('hasil-gravitasi');
+
+            if(isNaN(pa) || isNaN(pb) || isNaN(jarak) || jarak <= 0) {
+                hasilBox.classList.remove('hidden');
+                hasilBox.innerText = "Mohon masukkan seluruh data dengan benar!";
+                return;
+            }
+
+            const interaksi = (pa * pb) / Math.pow(jarak, 2);
+            hasilBox.classList.remove('hidden');
+            hasilBox.innerText = `Hasil: Kekuatan Interaksi Wilayah (I) = ${interaksi.toLocaleString('id-ID')}`;
+        }
+
+        // --- 50 UNIQUE GEOGRAPHY PRACTICE QUESTIONS ---
+        const tkaQuestions = [
+            {
+                id: 1,
+                topic: "Kelas X - Konsep Dasar Geografi",
+                type: "pg",
+                question: "Pembangunan villa di kawasan Puncak Bogor sering kali menyebabkan banjir bandang di Jakarta. Konsep esensial geografi yang paling tepat untuk menganalisis fenomena ini adalah...",
+                options: ["Konsep Lokasi", "Konsep Keterkaitan Keruangan", "Konsep Morfologi", "Konsep Aglomerasi", "Konsep Jarak Relatif"],
+                answer: 1,
+                explanation: "Pembahasan: Keterkaitan keruangan menyoroti hubungan sebab-akibat antarwilayah, di mana aktivitas di hulu (Puncak) berdampak langsung ke hilir (Jakarta)."
+            },
+            {
+                id: 2,
+                topic: "Kelas X - Pendekatan Geografi",
+                type: "pg",
+                question: "Penelitian mengenai dampak letusan Gunung Merapi terhadap tingkat kesuburan tanah pertanian dan mata pencaharian penduduk sekitar menggunakan pendekatan...",
+                options: ["Pendekatan Keruangan", "Pendekatan Kelingkungan (Ekologi)", "Pendekatan Kompleks Wilayah", "Pendekatan Historis", "Pendekatan Regional"],
+                answer: 2,
+                explanation: "Pembahasan: Pendekatan kompleks wilayah memadukan analisis keruangan dan ekologi secara komprehensif untuk menangani masalah regional yang kompleks."
+            },
+            {
+                id: 3,
+                topic: "Kelas X - Prinsip Geografi",
+                type: "pg",
+                question: "Penyebaran barang tambang batu bara di pulau Kalimantan terkonsentrasi di daerah cekungan sedimen tertentu. Prinsip geografi yang tergambar dari fenomena tersebut adalah...",
+                options: ["Prinsip Interelasi", "Prinsip Deskripsi", "Prinsip Korologi", "Prinsip Persebaran", "Prinsip Morfologi"],
+                answer: 3,
+                explanation: "Pembahasan: Prinsip persebaran menjelaskan bahwa gejala atau fenomena geosfer tersebar secara tidak merata di permukaan bumi."
+            },
+            {
+                id: 4,
+                topic: "Kelas X - Tokoh Geografi",
+                type: "matching",
+                question: "Manakah pasangan tokoh geografi dan kontribusinya yang paling akurat di bawah ini?",
+                options: ["Eratosthenes - Menghitung keliling bumi dengan bayangan tongkat", "Bernhard Varenius - Menemukan konsep zona iklim modern", "Alexander von Humboldt - Mengemukakan Teori Tempat Sentral", "Carl Ritter - Menulis buku Geographia Generalis", "Vidal de la Blache - Bapak Determinisme Lingkungan"],
+                answer: 0,
+                explanation: "Pembahasan: Eratosthenes dikenal sebagai ilmuwan Yunani Kuno yang pertama kali menghitung keliling bumi secara ilmiah dan mencetuskan istilah geografi."
+            },
+            {
+                id: 5,
+                topic: "Kelas X - Objek Studi Geografi",
+                type: "pg",
+                question: "Fenomena El Nino yang memicu musim kemarau panjang di Indonesia dikaji dalam objek material geografi pada lapisan...",
+                options: ["Litosfer", "Atmosfer", "Biosfer", "Antroposfer", "Pedosfer"],
+                answer: 1,
+                explanation: "Pembahasan: Atmosfer mencakup dinamika udara, cuaca, iklim, serta gejala iklim global seperti El Nino dan La Nina."
+            },
+            {
+                id: 6,
+                topic: "Kelas X - Analisis Grafik Iklim",
+                type: "chart",
+                question: "Grafik curah hujan bulanan di suatu wilayah menunjukkan puncak curah hujan tertinggi terjadi pada bulan Januari, sementara suhu udara konstan tinggi. Ciri iklim wilayah tersebut adalah...",
+                options: ["Iklim Tundra Kutub", "Iklim Hujan Tropis (Koppen tipe Af/Am)", "Iklim Gurun Pasir Kontinental", "Iklim Subtropis Kering", "Iklim Sedang Mediterania"],
+                answer: 1,
+                explanation: "Pembahasan: Wilayah tropis memiliki suhu konstan tinggi sepanjang tahun dengan curah hujan musiman yang dipengaruhi angin muson."
+            },
+            {
+                id: 7,
+                topic: "Kelas X - Pemetaan & Skala",
+                type: "pg",
+                question: "Jarak antara kota A dan B pada peta bersekala 1 : 200.000 adalah 4 cm. Jarak sebenarnya di lapangan adalah...",
+                options: ["4 km", "8 km", "20 km", "40 km", "80 km"],
+                answer: 1,
+                explanation: "Pembahasan: JP × Penyebut Skala = 4 cm × 200.000 = 800.000 cm = 8 km."
+            },
+            {
+                id: 8,
+                topic: "Kelas X - Penginderaan Jauh",
+                type: "pg",
+                question: "Dalam citra penginderaan jauh, objek badan air tawar (danau/sungai) selalu tampak gelap pada saluran inframerah karena...",
+                options: ["Badan air menyerap hampir seluruh tenaga inframerah", "Air memantulkan gelombang inframerah dengan sangat kuat", "Resolusi spasial citra terlalu rendah", "Suhu air terlalu dingin di bawah titik beku", "Kandungan sedimen air sangat tinggi"],
+                answer: 0,
+                explanation: "Pembahasan: Air memiliki daya serap yang sangat tinggi terhadap spektrum gelombang inframerah, sehingga objek air tampak hitam/gelap pada citra."
+            },
+            {
+                id: 9,
+                topic: "Kelas X - Sistem Informasi Geografis (SIG)",
+                type: "pg",
+                question: "Dalam analisis SIG, overlay (tumpang susun) peta jenis tanah, peta kemiringan lereng, dan peta curah hujan digunakan untuk menentukan...",
+                options: ["Tingkat kerawanan tanah longsor", "Jalur evakuasi tsunami", "Jumlah penduduk miskin urban", "Potensi cadangan minyak bumi", "Sebaran jaringan internet nirkabel"],
+                answer: 0,
+                explanation: "Pembahasan: Kombinasi data tanah, lereng, dan curah hujan merupakan parameter utama penentu zona kerawanan bencana longsor."
+            },
+            {
+                id: 10,
+                topic: "Kelas X - Penelitian Geografi",
+                type: "pg",
+                question: "Langkah awal yang harus dilakukan peneliti sebelum menyusun rumusan masalah dalam penelitian geografi adalah...",
+                options: ["Melakukan uji statistik data", "Menyusun kesimpulan sementara", "Observasi pendahuluan atau studi pendahuluan lapangan", "Membuat laporan akhir proyek", "Menyebarkan kuesioner acak"],
+                answer: 2,
+                explanation: "Pembahasan: Studi pendahuluan atau pra-observasi penting untuk mengenali fenomena nyata di lapangan sebelum merumuskan masalah penelitian."
+            },
+            {
+                id: 11,
+                topic: "Kelas XI - Posisi Strategis Indonesia",
+                type: "pg",
+                question: "Letak astronomis Indonesia pada 6°LU - 11°LS dan 95°BT - 141°BT memberikan dampak positif berupa...",
+                options: ["Wilayah terbagi menjadi empat daerah waktu", "Keanekaragaman hayati tinggi dan curah hujan melimpah", "Suhu udara dingin sepanjang tahun", "Bebas dari jalur angin siklon tropis", "Sebaran penduduk yang selalu merata di setiap pulau"],
+                answer: 1,
+                explanation: "Pembahasan: Posisi lintang tropis memastikan penyinaran matahari sepanjang tahun dan kelembapan tinggi yang menyuburkan flora-fauna."
+            },
+            {
+                id: 12,
+                topic: "Kelas XI - Letak Geologis",
+                type: "pg",
+                question: "Pertemuan tiga lempeng utama dunia di wilayah Indonesia menyebabkan tingginya aktivitas vulkanisme. Keuntungan tidak langsung dari kondisi tersebut adalah...",
+                options: ["Terhindar dari ancaman tsunami", "Tanah menjadi sangat subur akibat pelapukan abu vulkanik", "Cadangan air tanah sangat langka", "Suhu udara di dataran rendah selalu dingin", "Wilayah daratan semakin menyusut setiap tahun"],
+                answer: 1,
+                explanation: "Pembahasan: Material vulkanik kaya unsur hara dari letusan gunung api memperkaya kesuburan tanah pertanian di Indonesia."
+            },
+            {
+                id: 13,
+                topic: "Kelas XI - Pengelolaan SDA",
+                type: "pg",
+                question: "Penerapan konsep pembangunan berkelanjutan dalam pemanfaatan sumber daya hutan dapat dilakukan melalui...",
+                options: ["Penebangan hutan secara total untuk perkebunan monokultur", "Sistem tebang pilih tanam strip dan reboisasi lahan kritis", "Mengeksploitasi kayu keras tanpa batas izin", "Membuka hutan lindung demi jalur tol baru", "Melarang masyarakat memanfaatkan hasil hutan non-kayu"],
+                answer: 1,
+                explanation: "Pembahasan: Sistem tebang pilih (TPTI) dan reboisasi menjaga kelestarian tegakan hutan agar generasi mendatang tetap dapat memanfaatkannya."
+            },
+            {
+                id: 14,
+                topic: "Kelas XI - Flora & Fauna",
+                type: "matching",
+                question: "Pilihlah kelompok fauna Indonesia beserta wilayah sebarannya yang paling tepat:",
+                options: ["Gajah, Harimau, Orangutan - Wilayah Asiatis", "Komodo, Anoa, Babirusa - Wilayah Australis", "Kuskus, Cenderawasih, Kanguru - Wilayah Asiatis", "Burung Maleo, Badak Jawa - Wilayah Wallacea", "Orangutan, Kuskus, Komodo - Wilayah Sunda Shelf"],
+                answer: 0,
+                explanation: "Pembahasan: Gajah, harimau, dan orangutan adalah mamalia berukuran besar khas wilayah Asiatis di barat garis Wallace."
+            },
+            {
+                id: 15,
+                topic: "Kelas XI - Garis Wallace & Weber",
+                type: "pg",
+                question: "Garis yang memisahkan wilayah fauna tipe peralihan (Wallacea) dengan wilayah fauna tipe Australis di timur Indonesia adalah...",
+                options: ["Garis Wallace", "Garis Weber", "Garis Khatulistiwa", "Garis Isobar", "Garis Kontur"],
+                answer: 1,
+                explanation: "Pembahasan: Garis Weber membatasi wilayah transisi Wallacea dengan paparan Sahul (Australis)."
+            },
+            {
+                id: 16,
+                topic: "Kelas XI - Bioma Dunia",
+                type: "pg",
+                question: "Bioma darat di bumi yang didominasi oleh tumbuhan runcing (konifer) seperti cemara dan pinus serta dihuni oleh beruang hitam dan serigala adalah...",
+                options: ["Bioma Tundra", "Bioma Taiga (Boreal)", "Bioma Hutan Gugur", "Bioma Sabana", "Bioma Gurun"],
+                answer: 1,
+                explanation: "Pembahasan: Taiga adalah hutan konifer subarktik yang membentang luas di lintang tinggi belahan bumi utara."
+            },
+            {
+                id: 17,
+                topic: "Kelas XI - Konservasi Alam",
+                type: "pg",
+                question: "Suatu kawasan suaka alam yang mempunyai ciri khas tumbuhan, hewan, dan ekosistem tertentu yang dikembangkan untuk tujuan penelitian dan perlindungan disebut...",
+                options: ["Cagar Alam", "Taman Nasional", "Suaka Margasatwa", "Hutan Produksi", "Taman Wisata Alam"],
+                answer: 0,
+                explanation: "Pembahasan: Cagar alam adalah kawasan suaka alam yang keadaannya dibiarkan apa adanya untuk keperluan ilmu pengetahuan dan konservasi ketat."
+            },
+            {
+                id: 18,
+                topic: "Kelas XI - Kependudukan",
+                type: "chart",
+                question: "Piramida penduduk bentuk 'Granat' atau stasioner mencirikan suatu negara dengan kondisi...",
+                options: ["Angka kelahiran dan kematian rendah serta pertumbuhan penduduk stabil", "Angka kelahiran sangat tinggi dan pertumbuhan penduduk meledak", "Angka kematian bayi sangat tinggi di semua usia", "Jumlah penduduk lanjut usia sangat sedikit", "Migrasi keluar mendominasi struktur demografi"],
+                answer: 0,
+                explanation: "Pembahasan: Piramida stasioner menunjukkan tingkat kelahiran dan kematian seimbang, mencirikan negara maju dengan pertumbuhan penduduk lambat/stabil."
+            },
+            {
+                id: 19,
+                topic: "Kelas XI - Ketahanan Pangan",
+                type: "pg",
+                question: "Strategi utama pemerintah dalam mewujudkan ketahanan pangan nasional di tengah alih fungsi lahan pertanian subur adalah...",
+                options: ["Mengandalkan impor beras secara permanen", "Intensifikasi pertanian dan pengembangan lumbung pangan (food estate)", "Menghentikan seluruh aktivitas industri di kota besar", "Menutup sektor perikanan tangkap laut", "Melarang petani menggunakan pupuk organik"],
+                answer: 1,
+                explanation: "Pembahasan: Intensifikasi (panca usaha tani) dan program food estate bertujuan meningkatkan produktivitas dan cadangan pangan nasional."
+            },
+            {
+                id: 20,
+                topic: "Kelas XI - Mitigasi Bencana",
+                type: "pg",
+                question: "Tindakan mitigasi struktural dalam menghadapi bencana gempa bumi di daerah rakap tektonik adalah...",
+                options: ["Menyusun jalur evakuasi mandiri warga", "Membangun rumah tahan gempa berstruktur ringan", "Mengadakan pelatihan evakuasi mandiri anak sekolah", "Membuat peta zona rawan gempa nasional", "Meningkatkan kesiapsiagaan warga melalui sirine dini"],
+                answer: 1,
+                explanation: "Pembahasan: Mitigasi struktural berkaitan dengan pembangunan fisik, seperti rekayasa bangunan tahan gempa."
+            },
+            {
+                id: 21,
+                topic: "Kelas XII - Wilayah & Perwilayahan",
+                type: "pg",
+                question: "Perwilayahan formal (homogenious region) didasarkan pada kesamaan kriteria berupa...",
+                options: ["Aktivitas perdagangan dan interaksi ekonomi harian", "Karakteristik fisik atau sosial yang seragam, seperti wilayah pegunungan kapur", "Arus migrasi penduduk dari desa ke kota", "Jaringan transportasi massal antar kota", "Fungsi pusat pemerintahan administratif"],
+                answer: 1,
+                explanation: "Pembahasan: Wilayah formal bercirikan keseragaman (homogenitas) fisik atau sosial, misal kawasan karst atau dataran rendah pertanian."
+            },
+            {
+                id: 22,
+                topic: "Kelas XII - Pusat Pertumbuhan",
+                type: "pg",
+                question: "Menurut Teori Tempat Sentral Walter Christaller, hierarki 4 (K=4) merupakan prinsip yang mengoptimalkan...",
+                options: ["Situasi pasar optimum", "Situasi lalu lintas optimum (traffic situation)", "Situasi administrasi pemerintahan", "Kawasan industri berat", "Persebaran permukiman tradisional"],
+                answer: 1,
+                explanation: "Pembahasan: Christaller menetapkan K=4 sebagai prinsip lalu lintas optimum yang menghubungkan kota-kota secara efisien."
+            },
+            {
+                id: 23,
+                topic: "Kelas XII - Teori Gravitasi Reilly",
+                type: "pg",
+                question: "Kota X memiliki penduduk 200.000 jiwa dan Kota Y berpenduduk 800.000 jiwa terpisah jarak 30 km. Lokasi ideal pembangunan fasilitas pusat perbelanjaan menurut Teori Titik Henti adalah...",
+                options: ["10 km dari Kota X", "15 km dari Kota X", "20 km dari Kota X", "5 km dari Kota Y", "25 km dari Kota Y"],
+                answer: 0,
+                explanation: "Pembahasan: Rumus Titik Henti: D_AB / (1 + akar(Pb/Pa)) = 30 / (1 + akar(800k/200k)) = 30 / (1 + 2) = 10 km dari kota berpenduduk lebih kecil (Kota X)."
+            },
+            {
+                id: 24,
+                topic: "Kelas XII - Struktur Ruang Kota",
+                type: "matching",
+                question: "Pilihlah pasangan teori struktur keruangan kota dan karakteristiknya yang paling tepat:",
+                options: ["Teori Konsentris Burgess - Kota berkembang dari pusat melingkar keluar", "Teori Sektoral Hoyt - Kota berkembang membentuk lingkaran konsentris penuh", "Teori Inti Berganda Harris-Ullman - Kota hanya memiliki satu pusat tunggal", "Teori Poros - Kota berkembang menyebar ke segala arah secara acak", "Teori Konsektoral - Kota berbentuk linier di sepanjang rel kereta"],
+                answer: 0,
+                explanation: "Pembahasan: Teori Konsentris oleh E.W. Burgess menyatakan struktur kota berkembang secara melingkar (konsentris) keluar dari pusat CBD."
+            },
+            {
+                id: 25,
+                topic: "Kelas XII - Interaksi Desa Kota",
+                type: "pg",
+                question: "Dampak negatif interaksi desa-kota bagi wilayah pedesaan adalah terjadinya fenomena 'desa swadaya yang ditinggalkan usia produktif', yang dikenal sebagai...",
+                options: ["Urbanisasi desa", "Anak muda desa enggan bertani (rural brain drain)", "Pemberdayaan ekonomi lokal", "Peningkatan industri padat karya", "Pemerataan pendapatan desa"],
+                answer: 1,
+                explanation: "Pembahasan: Migrasi penduduk usia produktif ke kota menyebabkan desa kekurangan tenaga kerja muda yang inovatif di sektor pertanian."
+            },
+            {
+                id: 26,
+                topic: "Kelas XII - Negara Maju & Berkembang",
+                type: "pg",
+                question: "Indikator utama yang digunakan Bank Dunia untuk mengklasifikasikan tingkat kemajuan suatu negara adalah...",
+                options: ["Jumlah pulau dan luas wilayah daratan", "Pendapatan Nasional Bruto (GNI) per kapita", "Jumlah tentara aktif dalam militer", "Tingkat keragaman suku bangsa", "Curah hujan tahunan rata-rata"],
+                answer: 1,
+                explanation: "Pembahasan: GNI (Gross National Income) per kapita adalah tolok ukur utama standar ekonomi internasional."
+            },
+            {
+                id: 27,
+                topic: "Kelas X - Konsep Esensial Geografi",
+                type: "pg",
+                question: "Kawasan industri jababeka di Cikarang dikelompokkan berdasarkan kedekatan akses bahan baku dan tenaga kerja. Konsep geografi yang tepat adalah...",
+                options: ["Konsep Aglomerasi", "Konsep Morfologi", "Konsep Jarak", "Konsep Keterjangkauan", "Konsep Nilai Guna"],
+                answer: 0,
+                explanation: "Pembahasan: Aglomerasi adalah konsep pengelompokan aktivitas manusia di suatu wilayah yang memiliki kesamaan fungsi."
+            },
+            {
+                id: 28,
+                topic: "Kelas X - Pendekatan Keruangan",
+                type: "pg",
+                question: "Analisis pola permukiman penduduk yang memanjang mengikuti aliran sungai di Kalimantan menggunakan pendekatan...",
+                options: ["Pendekatan Keruangan", "Pendekatan Kelingkungan", "Pendekatan Historis", "Pendekatan Ekonomi", "Pendekatan Sosiologis"],
+                answer: 0,
+                explanation: "Pembahasan: Pendekatan keruangan menelaah sebaran dan pola persebaran objek di permukaan bumi."
+            },
+            {
+                id: 29,
+                topic: "Kelas X - Prinsip Korologi",
+                type: "pg",
+                question: "Kajian komprehensif mengenai fenomena kebakaran hutan di Riau yang memadukan analisis persebaran titik api, tiupan angin, dan kerugian ekonomi masyarakat disebut prinsip...",
+                options: ["Prinsip Persebaran", "Prinsip Interelasi", "Prinsip Deskripsi", "Prinsip Korologi", "Prinsip Distribusi"],
+                answer: 3,
+                explanation: "Pembahasan: Korologi adalah prinsip paling komprehensif yang memadukan persebaran, interelasi, dan deskripsi dalam suatu ruang."
+            },
+            {
+                id: 30,
+                topic: "Kelas X - Peta & Skala",
+                type: "pg",
+                question: "Sebuah peta memiliki skala 1 : 100.000. Jika jarak pada peta antara titik C dan D adalah 5 cm, maka jarak sebenarnya di lapangan adalah...",
+                options: ["0.5 km", "5 km", "50 km", "500 km", "5000 km"],
+                answer: 1,
+                explanation: "Pembahasan: 5 cm × 100.000 = 500.000 cm = 5 km."
+            },
+            {
+                id: 31,
+                topic: "Kelas X - Penginderaan Jauh",
+                type: "pg",
+                question: "Kemampuan sensor penginderaan jauh untuk merekam objek terkecil di permukaan bumi disebut...",
+                options: ["Resolusi Spasial", "Resolusi Radiometrik", "Resolusi Temporal", "Resolusi Spektral", "Skala Peta"],
+                answer: 0,
+                explanation: "Pembahasan: Resolusi spasial menyatakan ukuran objek terkecil yang dapat dideteksi oleh sensor satelit."
+            },
+            {
+                id: 32,
+                topic: "Kelas X - SIG",
+                type: "pg",
+                question: "Data dalam Sistem Informasi Geografis yang disajikan dalam bentuk piksel atau grid sel matriks disebut...",
+                options: ["Data Vektor", "Data Raster", "Data Atribut", "Data Tabular", "Data Deskriptif"],
+                answer: 1,
+                explanation: "Pembahasan: Data raster adalah data grafis berbasis grid/sel piksel (seperti citra foto udara)."
+            },
+            {
+                id: 33,
+                topic: "Kelas XI - Posisi Strategis Indonesia",
+                type: "pg",
+                question: "Berikut ini yang bukan merupakan keuntungan letak geografis Indonesia adalah...",
+                options: ["Menjadi jalur transit pelayaran internasional", "Rawan menjadi jalur peredaran narkotika transnasional", "Mudah melakukan kerja sama ekspor impor global", "Menjadi titik silang kebudayaan dunia", "Kekayaan hasil laut yang melimpah"],
+                answer: 1,
+                explanation: "Pembahasan: Kerawanan penyelundupan merupakan dampak negatif atau tantangan, bukan keuntungan geografis."
+            },
+            {
+                id: 34,
+                topic: "Kelas XI - SDA Tambang",
+                type: "pg",
+                question: "Daerah di Indonesia yang terkenal sebagai penghasil tambang bijih nikel terbesar untuk bahan baku baterai kendaraan listrik adalah...",
+                options: ["Sorowako dan Morowali", "Cepu dan Plaju", "Ombilin dan Bukit Asam", "Tembagapura dan Timika", "Bontang dan Arun"],
+                answer: 0,
+                explanation: "Pembahasan: Morowali di Sulawesi Tengah dan Sorowako di Sulawesi Selatan adalah pusat cadangan nikel laterit terbesar."
+            },
+            {
+                id: 35,
+                topic: "Kelas XI - Flora & Fauna",
+                type: "pg",
+                question: "Jenis flora endemik hutan hujan tropis Sumatra dan Kalimantan yang terkenal memiliki ukuran bunga raksasa tanpa daun adalah...",
+                options: ["Rafflesia arnoldii", "Eengkabawang", "Cendana", "Kayu Hitam", "Edelweis"],
+                answer: 0,
+                explanation: "Pembahasan: Rafflesia arnoldii adalah tumbuhan parasit endemik Sumatra yang dilindungi."
+            },
+            {
+                id: 36,
+                topic: "Kelas XI - Kependudukan",
+                type: "pg",
+                question: "Rasio ketergantungan (dependency ratio) di suatu wilayah dihitung berdasarkan perbandingan antara...",
+                options: ["Penduduk usia non-produktif (0-14 dan >65 tahun) dengan penduduk usia produktif (15-64 tahun)", "Jumlah laki-laki dan perempuan", "Jumlah penduduk kota dan desa", "Jumlah kelahiran dan kematian bayi", "Jumlah migran masuk dan keluar"],
+                answer: 0,
+                explanation: "Pembahasan: Rasio ketergantungan membandingkan beban tanggungan penduduk non-produktif terhadap penduduk usia kerja."
+            },
+            {
+                id: 37,
+                topic: "Kelas XI - Ketahanan Pangan",
+                type: "pg",
+                question: "Upaya memperluas areal pertanian baru dengan membuka hutan rawa atau gambut di luar Jawa disebut...",
+                options: ["Intensifikasi", "Ekstensifikasi", "Diversifikasi", "Reboisasi", "Terracing"],
+                answer: 1,
+                explanation: "Pembahasan: Ekstensifikasi pertanian adalah memperluas lahan garapan baru untuk meningkatkan produksi pangan."
+            },
+            {
+                id: 38,
+                topic: "Kelas XI - Mitigasi Bencana",
+                type: "pg",
+                question: "Tanda-tanda alam sebelum terjadinya tsunami di wilayah pesisir pantai adalah...",
+                options: ["Air laut surut secara tiba-tiba dan drastis", "Terjadi hujan lebat disertai badai petir", "Suhu air laut mendadak sangat panas", "Munculnya pelangi besar di ufuk barat", "Angin bertiup kencang dari darat ke laut"],
+                answer: 0,
+                explanation: "Pembahasan: Surutnya air laut secara mendadak pasca gempa kuat adalah gejala awal tsunami."
+            },
+            {
+                id: 39,
+                topic: "Kelas XII - Pusat Pertumbuhan",
+                type: "pg",
+                question: "Kota Medan di Sumatra Utara berfungsi sebagai pusat pertumbuhan utama yang memacu pembangunan wilayah di kawasan regional...",
+                options: ["Wilayah Pembangunan Utama A", "Wilayah Pembangunan Utama B", "Wilayah Pembangunan Utama C", "Wilayah Pembangunan Utama D", "Wilayah Pembangunan Utama E"],
+                answer: 0,
+                explanation: "Pembahasan: Medan (Wilayah A) menjadi pusat utama pembangunan untuk Pulau Sumatra bagian utara."
+            },
+            {
+                id: 40,
+                topic: "Kelas XII - Teori Gravitasi",
+                type: "pg",
+                question: "Faktor utama yang memperbesar kekuatan interaksi antar dua wilayah menurut hukum gravitasi Reilly adalah...",
+                options: ["Jumlah penduduk yang besar dan jarak yang dekat", "Luas wilayah daratan yang sempit", "Perbedaan jenis iklim yang tajam", "Jumlah kendaraan umum yang sedikit", "Tingkat curah hujan tahunan"],
+                answer: 0,
+                explanation: "Pembahasan: Kekuatan interaksi berbanding lurus dengan perkalian jumlah penduduk dan berbanding terbalik dengan kuadrat jarak."
+            },
+            {
+                id: 41,
+                topic: "Kelas XII - Struktur Kota",
+                type: "pg",
+                question: "Teori sektoral Homer Hoyt menyatakan bahwa struktur internal kota berkembang berdasarkan...",
+                options: ["Sektor-sektor jalur transportasi memanjang dari pusat ke pinggir", "Gelombang konsentris melingkar sempurna", "Banyaknya inti pusat nukleus baru", "Pola garis pantai laut", "Ketinggian kontur permukaan tanah"],
+                answer: 0,
+                explanation: "Pembahasan: Hoyt menekankan pengaruh sektor jalur transportasi terhadap tata guna lahan kota."
+            },
+            {
+                id: 42,
+                topic: "Kelas XII - Urbanisasi",
+                type: "pg",
+                question: "Dampak positif urbanisasi bagi kota besar ditinjau dari aspek ekonomi adalah...",
+                options: ["Tersedianya pasokan tenaga kerja murah bagi sektor industri dan jasa", "Munculnya kawasan permukiman kumuh (slum area)", "Meningkatnya angka pengangguran terbuka", "Peningkatan kemacetan lalu lintas harian", "Tingginya angka kriminalitas jalanan"],
+                answer: 0,
+                explanation: "Pembahasan: Dari sudut pandang ekonomi perkotaan, tenaga kerja migran menopang operasional pabrik dan sektor jasa."
+            },
+            {
+                id: 43,
+                topic: "Kelas XII - Negara Maju",
+                type: "pg",
+                question: "Berikut ini yang merupakan ciri utama negara maju di benua Eropa adalah...",
+                options: ["Angka pertumbuhan penduduk sangat rendah atau negatif", "Dominasi sektor primer pertanian tradisional", "Angka harapan hidup di bawah 50 tahun", "Pendapatan per kapita sangat rendah", "Tingkat buta huruf penduduk tinggi"],
+                answer: 0,
+                explanation: "Pembahasan: Negara maju bercirikan pertumbuhan penduduk lambat, kesehatan prima, dan dominasi sektor jasa/teknologi."
+            },
+            {
+                id: 44,
+                topic: "Kelas X - Litosfer",
+                type: "pg",
+                question: "Tenaga endogen yang membentuk pegunungan lipatan muda seperti sirkum mediterania adalah...",
+                options: ["Tektonisme orogenetik", "Vulkanisme eksplosif", "Pelapukan kimiawi batuan", "Erosi angin gurun", "Sedimentasi fluvial"],
+                answer: 0,
+                explanation: "Pembahasan: Orogenesis adalah proses pembentukan pegunungan lipatan dan patahan akibat pergerakan lempeng tektonik."
+            },
+            {
+                id: 45,
+                topic: "Kelas X - Hidrosfer",
+                type: "pg",
+                question: "Gerakan massa air laut vertikal dari lapisan bawah ke permukaan yang membawa banyak plankton dan ikan disebut...",
+                options: ["Upwelling", "Downwelling", "Pasang surut", "Gelombang tsunami", "Arus konveksi"],
+                answer: 0,
+                explanation: "Pembahasan: Upwelling adalah naiknya air dingin kaya zat hara dari dasar laut ke permukaan, sangat potensial bagi perikanan."
+            },
+            {
+                id: 46,
+                topic: "Kelas XI - Biosfer",
+                type: "pg",
+                question: "Faktor klimatik utama yang membatasi pertumbuhan jenis tanaman di daerah gurun pasir adalah...",
+                options: ["Curah hujan yang sangat rendah dan penguapan tinggi", "Suhu udara dingin di bawah 0°C", "Intensitas cahaya matahari minim", "Tekanan udara sangat tinggi", "Kelembapan udara 100%"],
+                answer: 0,
+                explanation: "Pembahasan: Faktor air dan suhu ekstrem membatasi vegetasi gurun hanya pada tumbuhan xerofit seperti kaktus."
+            },
+            {
+                id: 47,
+                topic: "Kelas XI - SDA Kelautan",
+                type: "pg",
+                question: "Potensi lestari perikanan tangkap di Zona Ekonomi Eksklusif (ZEE) Indonesia diatur agar tidak melampaui batas...",
+                options: ["Maximum Sustainable Yield (MSY)", "Minimum Wage Limit", "Total Export Quota", "Gross Domestic Product", "Sovereign Debt Ratio"],
+                answer: 0,
+                explanation: "Pembahasan: MSY adalah ambang batas tangkapan lestari agar stok ikan di laut tidak mengalami overfishing."
+            },
+            {
+                id: 48,
+                topic: "Kelas XII - Perencanaan Wilayah",
+                type: "pg",
+                question: "Penyusunan Rencana Tata Ruang Wilayah (RTRW) nasional bertujuan untuk...",
+                options: ["Mewujudkan pemanfaatan ruang wilayah yang aman, nyaman, produktif, dan berkelanjutan", "Memusatkan seluruh penduduk di ibukota negara", "Menghapuskan kawasan hutan lindung", "Meningkatkan alih fungsi lahan sawah produktif", "Membatasi investasi asing di semua sektor"],
+                answer: 0,
+                explanation: "Pembahasan: RTRW memastikan pembangunan spasial seimbang dan ramah lingkungan."
+            },
+            {
+                id: 49,
+                topic: "Kelas XII - Globalisasi",
+                type: "pg",
+                question: "Pengaruh globalisasi terhadap keruangan desa di Indonesia ditandai dengan...",
+                options: ["Masuknya teknologi informasi dan modernisasi pola konsumsi masyarakat desa", "Terisolasinya desa dari dunia luar secara total", "Punahnya seluruh tradisi gotong royong tanpa sisa", "Menurunnya jumlah sekolah dasar di pedesaan", "Hilangnya mata pencaharian bertani secara mutlak"],
+                answer: 0,
+                explanation: "Pembahasan: Globalisasi mempercepat arus informasi, digitalisasi, dan modernisasi gaya hidup di pedesaan."
+            },
+            {
+                id: 50,
+                topic: "Kelas XII - Evaluasi Wilayah",
+                type: "pg",
+                question: "Keberhasilan suatu pusat pertumbuhan wilayah dapat diukur dari...",
+                options: ["Peningkatan arus barang, jasa, dan mobilitas penduduk yang merata ke wilayah sekitar", "Tingginya tingkat kemacetan total di pusat kota", "Penyusutan jumlah penduduk di kota satelit", "Terhentinya aktivitas ekonomi di daerah pinggiran", "Monopoli perdagangan oleh satu perusahaan saja"],
+                answer: 0,
+                explanation: "Pembahasan: Pusat pertumbuhan yang sukses akan memancarkan efek tetesan ke bawah (trickle-down effect) bagi kesejahteraan wilayah sekitarnya."
+            }
+        ];
+
+        let currentTKAIndex = 0;
+        let userAnswers = {};
+        let tkaTimerInterval = null;
+        let timeLeft = 2700; // 45 minutes for 50 questions
+
+        function mulaiTKA() {
+            currentTKAIndex = 0;
+            userAnswers = {};
+            timeLeft = 2700;
+            document.getElementById('tka-preview-list').classList.add('hidden');
+            document.querySelector('#tab-tka > div:first-child').classList.add('hidden');
+            document.getElementById('tka-result-box').classList.add('hidden');
+            document.getElementById('tka-exam-box').classList.remove('hidden');
+
+            loadTKAQuestion();
+            startTKATimer();
+        }
+
+        function startTKATimer() {
+            if(tkaTimerInterval) clearInterval(tkaTimerInterval);
+            tkaTimerInterval = setInterval(() => {
+                timeLeft--;
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                document.getElementById('tka-timer').innerText = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+                if(timeLeft <= 0) {
+                    clearInterval(tkaTimerInterval);
+                    selesaiTKA();
+                }
+            }, 1000);
+        }
+
+        function loadTKAQuestion() {
+            const q = tkaQuestions[currentTKAIndex];
+            document.getElementById('tka-counter').innerText = `Soal ${currentTKAIndex + 1} dari ${tkaQuestions.length}`;
+            document.getElementById('tka-question-topic').innerText = q.topic;
+            document.getElementById('tka-question-text').innerText = q.question;
+
+            // Optional Media simulation for chart questions
+            const mediaContainer = document.getElementById('tka-media-container');
+            if(q.type === 'chart') {
+                mediaContainer.innerHTML = `
+                    <div class="p-4 bg-slate-100 rounded-xl border border-slate-200 text-center space-y-2 mb-4">
+                        <i class="fa-solid fa-chart-line text-emerald-600 text-3xl"></i>
+                        <p class="text-xs font-semibold text-slate-700">[Ilustrasi Grafik / Data Ujian: Analisis Klimatologi & Kependudukan]</p>
+                    </div>
+                `;
+            } else if(q.type === 'matching') {
+                mediaContainer.innerHTML = `
+                    <div class="p-3 bg-teal-50 rounded-xl border border-teal-200 text-xs font-semibold text-teal-900 mb-4">
+                        <i class="fa-solid fa-shuffle mr-1"></i> Soal Menjodohkan: Pilih opsi yang paling sesuai dengan pernyataan di atas.
+                    </div>
+                `;
+            } else {
+                mediaContainer.innerHTML = '';
+            }
+
+            const optContainer = document.getElementById('tka-options-container');
+            optContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = userAnswers[currentTKAIndex] === idx;
+                const btnClass = isSelected 
+                    ? "w-full text-left p-4 rounded-xl border-2 border-emerald-600 bg-emerald-50 font-medium text-emerald-900 transition flex items-center gap-3 shadow-sm"
+                    : "w-full text-left p-4 rounded-xl border border-slate-200 hover:border-emerald-500 bg-white font-medium text-slate-700 transition flex items-center gap-3";
+                
+                optContainer.innerHTML += `
+                    <button onclick="selectTKAOption(${idx})" class="${btnClass}">
+                        <span class="w-6 h-6 rounded-full border border-slate-400 flex items-center justify-center text-xs font-bold ${isSelected ? 'bg-emerald-600 text-white border-emerald-600' : ''}">${String.fromCharCode(65 + idx)}</span>
+                        <span>${opt}</span>
+                    </button>
+                `;
+            });
+
+            document.getElementById('btn-prev-tka').disabled = currentTKAIndex === 0;
+            const nextBtn = document.getElementById('btn-next-tka');
+            if(currentTKAIndex === tkaQuestions.length - 1) {
+                nextBtn.innerText = "Selesai & Evaluasi Nilai";
+                nextBtn.className = "px-5 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold rounded-xl transition text-sm";
+            } else {
+                nextBtn.innerText = "Selanjutnya";
+                nextBtn.className = "px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition text-sm";
+            }
+        }
+
+        function selectTKAOption(optIdx) {
+            userAnswers[currentTKAIndex] = optIdx;
+            loadTKAQuestion();
+        }
+
+        function prevTKAQuestion() {
+            if(currentTKAIndex > 0) {
+                currentTKAIndex--;
+                loadTKAQuestion();
+            }
+        }
+
+        function nextTKAQuestion() {
+            if(currentTKAIndex < tkaQuestions.length - 1) {
+                currentTKAIndex++;
+                loadTKAQuestion();
+            } else {
+                selesaiTKA();
+            }
+        }
+
+        function selesaiTKA() {
+            if(tkaTimerInterval) clearInterval(tkaTimerInterval);
+            document.getElementById('tka-exam-box').classList.add('hidden');
+            document.getElementById('tka-result-box').classList.remove('hidden');
+
+            let correctCount = 0;
+            let reviewHtml = '';
+
+            tkaQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                const isCorrect = userAns === q.answer;
+                if(isCorrect) correctCount++;
+
+                reviewHtml += `
+                    <div class="p-4 rounded-xl border ${isCorrect ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'} space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-slate-500">${q.topic}</span>
+                            <span class="text-xs font-bold px-2 py-0.5 rounded ${isCorrect ? 'bg-emerald-200 text-emerald-800' : 'bg-rose-200 text-rose-800'}">${isCorrect ? 'Benar' : 'Salah'}</span>
+                        </div>
+                        <p class="text-sm font-bold">Soal ${idx + 1}: ${q.question}</p>
+                        <p class="text-xs">Jawaban Anda: <b>${userAns !== undefined ? q.options[userAns] : 'Tidak dijawab'}</b></p>
+                        ${!isCorrect ? `<p class="text-xs">Kunci Jawaban: <b>${q.options[q.answer]}</b></p>` : ''}
+                        <p class="text-xs italic text-slate-600">${q.explanation}</p>
+                    </div>
+                `;
+            });
+
+            const finalScore = Math.round((correctCount / tkaQuestions.length) * 100);
+            document.getElementById('tka-final-score').innerText = finalScore;
+            document.getElementById('tka-review-list').innerHTML = reviewHtml;
+        }
+
+        function resetTKA() {
+            document.getElementById('tka-result-box').classList.add('hidden');
+            document.getElementById('tka-preview-list').classList.remove('hidden');
+            document.querySelector('#tab-tka > div:first-child').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
