@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { bankQuestions, Question } from '../data/questionsData.ts';
+import { VisualQuestionRenderer } from './VisualQuestionRenderer.tsx';
 import { 
   Play, 
   Clock, 
@@ -20,20 +21,22 @@ import {
   HelpCircle,
   FileCheck,
   Check,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Compass,
+  Sparkles
 } from 'lucide-react';
 
-type ExamMode = 'standard_50' | 'full_100' | 'quick_10' | 'grade_10' | 'grade_11' | 'grade_12';
+type ExamMode = 'paket_2025' | 'model_defantri' | 'visual_hots' | 'standard_50' | 'full_all' | 'quick_10' | 'grade_10' | 'grade_11' | 'grade_12';
 
 export const ExamTab: React.FC = () => {
   const [examState, setExamState] = useState<'idle' | 'running' | 'finished'>('idle');
-  const [selectedMode, setSelectedMode] = useState<ExamMode>('standard_50');
+  const [selectedMode, setSelectedMode] = useState<ExamMode>('paket_2025');
   const [activeQuestions, setActiveQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
   const [flaggedQuestions, setFlaggedQuestions] = useState<Record<number, boolean>>({});
-  const [timeLeft, setTimeLeft] = useState<number>(2700); // 45 minutes default
-  const [initialTime, setInitialTime] = useState<number>(2700);
+  const [timeLeft, setTimeLeft] = useState<number>(3000); // 50 minutes default
+  const [initialTime, setInitialTime] = useState<number>(3000);
   const [isGridOpen, setIsGridOpen] = useState<boolean>(false);
   const [reviewFilter, setReviewFilter] = useState<'all' | 'wrong' | 'correct' | 'flagged'>('all');
   const [studentName, setStudentName] = useState<string>(() => {
@@ -47,19 +50,28 @@ export const ExamTab: React.FC = () => {
     let questionsToUse: Question[] = [];
     let allocatedSeconds = 2700; // 45 mins default
 
-    if (mode === 'standard_50') {
+    if (mode === 'paket_2025') {
+      questionsToUse = bankQuestions.filter(q => q.id >= 61 && q.id <= 110);
+      allocatedSeconds = 3000; // 50 mins for 50 comprehensive questions
+    } else if (mode === 'model_defantri') {
+      questionsToUse = bankQuestions.filter(q => q.badge?.includes('Defantri') || q.source?.includes('Defantri') || q.id <= 30);
+      allocatedSeconds = Math.round(questionsToUse.length * 60); // 1 min per question
+    } else if (mode === 'visual_hots') {
+      questionsToUse = bankQuestions.filter(q => q.visual !== undefined);
+      allocatedSeconds = Math.round(questionsToUse.length * 75); // 75 secs per visual question
+    } else if (mode === 'standard_50') {
       questionsToUse = bankQuestions.slice(0, 50);
       allocatedSeconds = 2700; // 45 mins
-    } else if (mode === 'full_100') {
+    } else if (mode === 'full_all') {
       questionsToUse = [...bankQuestions];
-      allocatedSeconds = 5400; // 90 mins (1.5 hours)
+      allocatedSeconds = Math.round(bankQuestions.length * 55);
     } else if (mode === 'quick_10') {
       const shuffled = [...bankQuestions].sort(() => 0.5 - Math.random());
       questionsToUse = shuffled.slice(0, 10);
       allocatedSeconds = 600; // 10 mins
     } else if (mode === 'grade_10') {
       questionsToUse = bankQuestions.filter(q => q.grade === 10);
-      allocatedSeconds = Math.round(questionsToUse.length * 54); // ~54 secs per question
+      allocatedSeconds = Math.round(questionsToUse.length * 54);
     } else if (mode === 'grade_11') {
       questionsToUse = bankQuestions.filter(q => q.grade === 11);
       allocatedSeconds = Math.round(questionsToUse.length * 54);
@@ -207,35 +219,89 @@ export const ExamTab: React.FC = () => {
               <label className="text-xs font-bold text-slate-600 uppercase tracking-wide">Pilih Paket Simulasi Ujian:</label>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div
-                  onClick={() => setSelectedMode('standard_50')}
+                  onClick={() => setSelectedMode('paket_2025')}
                   className={`p-5 rounded-2xl border-2 cursor-pointer transition-all ${
-                    selectedMode === 'standard_50'
-                      ? 'border-emerald-600 bg-emerald-50/60 shadow-xs'
+                    selectedMode === 'paket_2025'
+                      ? 'border-emerald-600 bg-emerald-50/80 shadow-md ring-2 ring-emerald-500'
                       : 'border-slate-200 bg-white hover:border-slate-300'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold px-2 py-0.5 rounded bg-emerald-200/80 text-emerald-800">Paket Standar</span>
-                    <Clock className="w-4 h-4 text-emerald-700" />
+                    <span className="text-xs font-bold px-2 py-0.5 rounded bg-emerald-700 text-white flex items-center gap-1 shadow-xs">
+                      <Sparkles className="w-3 h-3 text-amber-300" /> Paket Paling Baru (2025)
+                    </span>
+                    <Award className="w-4 h-4 text-emerald-700" />
                   </div>
-                  <h4 className="font-extrabold text-slate-900 text-base">Simulasi 50 Soal</h4>
-                  <p className="text-xs text-slate-600 mt-1">50 soal teruji Kelas X, XI, dan XII, durasi 45 menit standar seleksi perguruan tinggi.</p>
+                  <h4 className="font-extrabold text-slate-900 text-base">Model Asesmen 2025 (50 Soal Variatif)</h4>
+                  <p className="text-xs text-slate-600 mt-1">50 soal terbaru: Gambar interaktif (vulkanisme, angin muson, karst, delta, siklus air), Menjodohkan, & Pilihan Ganda Kompleks.</p>
                 </div>
 
                 <div
-                  onClick={() => setSelectedMode('full_100')}
+                  onClick={() => setSelectedMode('model_defantri')}
                   className={`p-5 rounded-2xl border-2 cursor-pointer transition-all ${
-                    selectedMode === 'full_100'
-                      ? 'border-emerald-600 bg-emerald-50/60 shadow-xs'
+                    selectedMode === 'model_defantri'
+                      ? 'border-emerald-600 bg-emerald-50/70 shadow-xs ring-1 ring-emerald-500'
                       : 'border-slate-200 bg-white hover:border-slate-300'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800">Bank Penuh</span>
+                    <span className="text-xs font-bold px-2 py-0.5 rounded bg-teal-100 text-teal-800 flex items-center gap-1">
+                      <Sparkles className="w-3 h-3" /> Model Defantri
+                    </span>
+                    <Award className="w-4 h-4 text-emerald-700" />
+                  </div>
+                  <h4 className="font-extrabold text-slate-900 text-base">Model Ujian Standar (Defantri & PTN)</h4>
+                  <p className="text-xs text-slate-600 mt-1">30 butir soal penalaran HOTS model Defantri & SIMAK PTN lengkap dengan stimulus peta, kontur, dan studi kasus riil.</p>
+                </div>
+
+                <div
+                  onClick={() => setSelectedMode('visual_hots')}
+                  className={`p-5 rounded-2xl border-2 cursor-pointer transition-all ${
+                    selectedMode === 'visual_hots'
+                      ? 'border-emerald-600 bg-emerald-50/70 shadow-xs ring-1 ring-emerald-500'
+                      : 'border-slate-200 bg-white hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-bold px-2 py-0.5 rounded bg-sky-100 text-sky-800 flex items-center gap-1">
+                      <Compass className="w-3 h-3 text-sky-700" /> Soal Visual & Grafis
+                    </span>
+                    <BarChart3 className="w-4 h-4 text-sky-700" />
+                  </div>
+                  <h4 className="font-extrabold text-slate-900 text-base">Drill Soal Bergambar & Diagram</h4>
+                  <p className="text-xs text-slate-600 mt-1">Khusus butir soal dengan stimulus peta kontur, grafik iklim, diagram subduksi lempeng, pola sungai, dan piramida penduduk.</p>
+                </div>
+
+                <div
+                  onClick={() => setSelectedMode('standard_50')}
+                  className={`p-5 rounded-2xl border-2 cursor-pointer transition-all ${
+                    selectedMode === 'standard_50'
+                      ? 'border-emerald-600 bg-emerald-50/70 shadow-xs ring-1 ring-emerald-500'
+                      : 'border-slate-200 bg-white hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Paket Standar</span>
+                    <Clock className="w-4 h-4 text-emerald-700" />
+                  </div>
+                  <h4 className="font-extrabold text-slate-900 text-base">Simulasi 50 Soal Teruji</h4>
+                  <p className="text-xs text-slate-600 mt-1">50 butir soal teruji gabungan Kelas X, XI, dan XII, durasi 45 menit standar asesmen akademik.</p>
+                </div>
+
+                <div
+                  onClick={() => setSelectedMode('full_all')}
+                  className={`p-5 rounded-2xl border-2 cursor-pointer transition-all ${
+                    selectedMode === 'full_all'
+                      ? 'border-emerald-600 bg-emerald-50/70 shadow-xs ring-1 ring-emerald-500'
+                      : 'border-slate-200 bg-white hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800">Bank Lengkap</span>
                     <Award className="w-4 h-4 text-purple-700" />
                   </div>
-                  <h4 className="font-extrabold text-slate-900 text-base">Ujian Marathon 100 Soal</h4>
-                  <p className="text-xs text-slate-600 mt-1">100 butir soal lengkap seluruh bab kurikulum, durasi 90 menit untuk menguji ketahanan berpikir.</p>
+                  <h4 className="font-extrabold text-slate-900 text-base">Ujian Komprehensif Lengkap</h4>
+                  <p className="text-xs text-slate-600 mt-1">Seluruh bank soal kurikulum dan paket model secara terpadu untuk penguasaan total.</p>
                 </div>
 
                 <div
@@ -408,21 +474,27 @@ export const ExamTab: React.FC = () => {
             </div>
           )}
 
-          {/* Media / Chart Simulation if type == chart or matching */}
-          {currentQ.type === 'chart' && (
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-center space-y-2">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
-                <BarChart3 className="w-5 h-5" />
-              </div>
-              <p className="text-xs font-bold text-slate-700">
-                [Ilustrasi Diagram & Grafik Analisis Data Geosfer]
-              </p>
-              <p className="text-xs text-slate-500 max-w-md mx-auto">
-                Perhatikan dinamika data statistik yang disajikan dalam narasi soal di bawah ini.
-              </p>
+          {/* Question Badge / Source Indicator */}
+          {currentQ.badge && (
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 flex items-center gap-1">
+                <Sparkles className="w-3 h-3 text-emerald-700" />
+                {currentQ.badge}
+              </span>
+              {currentQ.source && (
+                <span className="text-[11px] text-slate-400 font-medium">
+                  Sumber: {currentQ.source}
+                </span>
+              )}
             </div>
           )}
 
+          {/* Dedicated Visual Stimulus Component if available */}
+          {currentQ.visual && (
+            <VisualQuestionRenderer visual={currentQ.visual} />
+          )}
+
+          {/* Matching helper note */}
           {currentQ.type === 'matching' && (
             <div className="p-3 bg-teal-50 rounded-xl border border-teal-200 text-xs font-bold text-teal-900 flex items-center gap-2">
               <span className="w-5 h-5 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs">↔</span>
@@ -430,9 +502,17 @@ export const ExamTab: React.FC = () => {
             </div>
           )}
 
+          {/* Complex PG helper note */}
+          {currentQ.type === 'complex_pg' && (
+            <div className="p-3 bg-indigo-50 rounded-xl border border-indigo-200 text-xs font-bold text-indigo-900 flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs">✓</span>
+              <span>Tipe Pilihan Ganda Kompleks: Evaluasi kebenaran setiap butir pernyataan sebelum menentukan kombinasi opsi jawaban.</span>
+            </div>
+          )}
+
           {/* Question Text */}
           <div className="space-y-4">
-            <h3 className="text-slate-900 text-base sm:text-lg font-bold leading-relaxed">
+            <h3 className="text-slate-900 text-base sm:text-lg font-bold leading-relaxed whitespace-pre-line">
               {currentIndex + 1}. {currentQ.question}
             </h3>
 
@@ -644,7 +724,24 @@ export const ExamTab: React.FC = () => {
                       </span>
                     </div>
 
-                    <p className="text-sm font-bold text-slate-800">
+                    {q.badge && (
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-800">
+                          {q.badge}
+                        </span>
+                        {q.source && (
+                          <span className="text-[10px] text-slate-400">
+                            {q.source}
+                          </span>
+                        )}
+                      </div>
+                    )}
+
+                    {q.visual && (
+                      <VisualQuestionRenderer visual={q.visual} />
+                    )}
+
+                    <p className="text-sm font-bold text-slate-800 whitespace-pre-line">
                       Soal {idx + 1}: {q.question}
                     </p>
 

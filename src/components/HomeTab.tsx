@@ -51,7 +51,7 @@ export const HomeTab: React.FC<HomeTabProps> = ({ onNavigate }) => {
           </h1>
 
           <p className="text-emerald-100 text-sm sm:text-base leading-relaxed">
-            Dilengkapi materi Kelas X, XI, dan XII Kurikulum Merdeka yang sangat rinci, kalkulator rumus skala peta interaktif, serta bank 100 butir latihan ujian pilihan ganda, menjodohkan, dan analisis data dengan evaluasi nilai otomatis.
+            Dilengkapi materi Kelas X, XI, dan XII Kurikulum Merdeka yang mendalam, kalkulator rumus skala peta interaktif, serta bank butir latihan ujian pilihan ganda, penalaran peta kontur, grafik iklim, diagram subduksi lempeng, dan evaluasi nilai otomatis.
           </p>
 
           {/* Call to action buttons */}
@@ -61,7 +61,7 @@ export const HomeTab: React.FC<HomeTabProps> = ({ onNavigate }) => {
               className="px-6 py-3.5 bg-white text-emerald-900 font-extrabold rounded-2xl shadow-lg hover:bg-emerald-50 transition transform hover:-translate-y-0.5 active:scale-95 text-sm sm:text-base flex items-center gap-2"
             >
               <Award className="w-5 h-5 text-emerald-700" />
-              Mulai 100 Soal Ujian
+              Mulai Simulasi Ujian
             </button>
 
             <button
@@ -90,8 +90,8 @@ export const HomeTab: React.FC<HomeTabProps> = ({ onNavigate }) => {
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-xl sm:text-2xl font-black text-slate-900 block font-mono">100 Butir</span>
-            <span className="text-xs text-slate-500 font-medium">Bank Soal Unik & Variatif</span>
+            <span className="text-xl sm:text-2xl font-black text-slate-900 block font-mono">Soal Bergambar</span>
+            <span className="text-xs text-slate-500 font-medium">Stimulus Peta & Diagram HOTS</span>
           </div>
         </div>
 
